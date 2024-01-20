@@ -1,0 +1,66 @@
+--Requête pour avoir les données de chaque tableselect LIEUCOURS ,
+SELECT
+    LIEUCOURS,
+    INTITULECOURS,
+    CODECOURS,
+    ANNEECOURS,
+    IDFORM
+FROM
+    COURS;
+
+SELECT
+    COMPTFORM,
+    PRENOMFORM,
+    TITREFORM,
+    IDFORM
+FROM
+    FORMATEUR;
+
+SELECT
+    DOMAINECONF,
+    DATECONF,
+    IDCONF,
+    IDFORM
+FROM
+    CONFERENCE;
+
+SELECT
+    DATESQ,
+    DUREESQ,
+    IDSQ,
+    ANNEECOURS,
+    CODECOURS,
+    ETATSQ
+FROM
+    SEQUENCE;
+
+SELECT
+    NUMERO,
+    ANNEECOURS,
+    CODECOURS,
+    MONTANT,
+    SOLDE
+FROM
+    ENGAGER;
+
+--Requete pour connaître tout les participants et les cours où ils se sont engagés
+SELECT
+    C.INTITULECOURS,
+    P.NOMPATIENT
+FROM
+    PARTICIPANT P
+    INNER JOIN ENGAGER E
+    ON E.NUMERO = P.NUMERO
+    INNER JOIN COURS C
+    ON E.CODECOURS = C.CODECOURS;
+
+--Requête pour connaître les participants aux différentes conférences
+SELECT
+    C.DOMAINECONF,
+    P.NOMPATIENT
+FROM
+    PARTICIPANT P
+    INNER JOIN ASSISTER A
+    ON A.NUMERO = P.NUMERO
+    INNER JOIN CONFERENCE C
+    ON A.IDCONF = C.IDCONF;
